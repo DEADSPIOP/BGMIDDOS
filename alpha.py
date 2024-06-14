@@ -1,15 +1,14 @@
-# ReporterAlpha
 import telebot
 import subprocess
 import requests
 import datetime
 import os
 
-# insert your Telegram bot token here
-bot = telebot.TeleBot('BOT-TOKEN')
+# Insert your Telegram bot token here
+bot = telebot.TeleBot('7468132796:AAGqdy8EGOkkfkxmcHR_mPXPL8_aMIfQJAE')
 
 # Admin user IDs
-admin_id = ["YOUR-UID"]
+admin_id = ["5070337758"]
 
 # File to store allowed user IDs
 USER_FILE = "users.txt"
@@ -95,7 +94,7 @@ def add_user(message):
                 allowed_user_ids.append(user_to_add)
                 with open(USER_FILE, "a") as file:
                     file.write(f"{user_to_add}\n")
-                response = f"User {user_to_add} Got Access successfully"
+                response = f"User {user_to_add} Got Access successfully 🎉"
             else:
                 response = "User already exist in the Bot"
         else:
@@ -198,7 +197,7 @@ def show_recent_logs(message):
 @bot.message_handler(commands=['id'])
 def show_user_id(message):
     user_id = str(message.chat.id)
-    response = f"Your ID: {user_id}"
+    response = f"Your ID: {user_id} 👀"
     bot.reply_to(message, response)
 
 # Function to handle the reply when free users run the /bgmi command
@@ -206,7 +205,7 @@ def start_attack_reply(message, target, port, time):
     user_info = message.from_user
     username = user_info.username if user_info.username else user_info.first_name
     
-    response = f"{username}, Attack Started.\n\nTarget: {target}\nPort: {port}\nTime: {time} Seconds\nGame: BGMI"
+    response = f"{username}, Attack Started 🚀\n\nTarget: {target}\nPort: {port}\nTime: {time} Seconds\nGame: BGMI"
     bot.reply_to(message, response)
 
 # Dictionary to store the last time each user ran the /bgmi command
@@ -284,7 +283,7 @@ def show_help(message):
 To See Admin Commands:
 /admincmd : Shows All Admin Commands.
 
-Buy From :- @ReporterAlpha
+Buy From :- @MawaOwner
 '''
     for handler in bot.message_handlers:
         if hasattr(handler, 'commands'):
@@ -294,14 +293,16 @@ Buy From :- @ReporterAlpha
                 continue
             else:
                 help_text += f"{handler.commands[0]}: {handler.doc}\n"
-    bot.reply_to(message, help_text)
+    bot.reply_to(message, help_text, reply_markup=telebot.types.InlineKeyboardMarkup([
+        [telebot.types.InlineKeyboardButton("Buy Now", url="https://t.me/MawaOwner")],
+    ]))
 
 @bot.message_handler(commands=['start'])
 def welcome_start(message):
     user_name = message.from_user.first_name
     response = f'''👋🏻Welcome, {user_name}!
 Try To Run This Command : /help 
-Join :- t.me/ChannelLink'''
+Join :- t.me/MawaOwner'''
     bot.reply_to(message, response)
 
 @bot.message_handler(commands=['rules'])
@@ -349,7 +350,7 @@ def broadcast_message(message):
     if user_id in admin_id:
         command = message.text.split(maxsplit=1)
         if len(command) > 1:
-            message_to_broadcast = "Message To All Users By @ReporterAlpha:\n\n" + command[1]
+            message_to_broadcast = "Message To All Users By @MawaOwner" + command[1]
             with open(USER_FILE, "r") as file:
                 user_ids = file.read().splitlines()
                 for user_id in user_ids:
@@ -365,4 +366,3 @@ def broadcast_message(message):
 
     bot.reply_to(message, response)
 bot.polling()
- #ReporterAlpha
